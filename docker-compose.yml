@@ -1,0 +1,29 @@
+version: '3'
+services:
+  border-wars-database:
+    image: "postgres:12.3"
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: czKzwZg87*v**HVZ8*
+      POSTGRES_USER: postgres
+      POSTGRES_DB: border-warsdb
+  border-wars-backend:
+    image: markvdhorst/border-wars-backend:1.0.0
+    build: ./border-wars-backend
+    depends_on:
+      - border-wars-database
+    ports:
+    - "8080:8080"
+    - "9990:9990"
+    environment:
+      POSTGRES_URL: jdbc:postgresql://host.docker.internal:5432/border-warsdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: czKzwZg87*v**HVZ8*
+  border-wars-frontend:
+    image: markvdhorst/border-wars-frontend:1.0.0
+    build: ./border-wars-frontend
+    depends_on:
+      - border-wars-backend
+    ports:
+      - "4200:80"
