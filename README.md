@@ -21,7 +21,7 @@ Build and run the application
 
 #### Using images from dockerhub
 
-Create the build directories to satisfy the docker-compose build context
+Create the empty build directories to satisfy the docker-compose build context. This is required even with the --no-build flag.
 
     mkdir border-wars-frontend
     mkdir border-wars-backend
